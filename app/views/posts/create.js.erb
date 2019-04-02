@@ -1,0 +1,14 @@
+<% if @post.errors.any? %> 
+	$('#error-m').fadeIn(200, function(){
+		$(this).html("<div class='panel panel-danger'><div class='panel-heading'><div class='panel-title'><h3><%= pluralize(@post.errors.count, 'error') %> prohibited this post from being saved</h3></div></div><div class='panel-body'><ul><% @post.errors.each do |attr,message| %><li><%= message %></li><% end %></ul></div></div>");
+	});
+<% else %>
+	$('#mynewModal').modal('hide');
+	$('.post_title_new').val('');
+	$('.post_content_new').val('');
+	$('#post_<%= @post.id %>').hide().fadeIn(1000);
+	$('#error-m').remove();
+	$('#container_post').prepend("<%= j render(@post) %>");
+<% end %>
+
+
